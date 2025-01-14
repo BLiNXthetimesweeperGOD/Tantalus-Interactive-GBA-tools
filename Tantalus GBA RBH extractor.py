@@ -23,7 +23,7 @@ if not os.path.exists(outPath):
 
 def checkForByteString(path, string):
     with open(path, 'rb') as file:
-        content = file.read(0x100000)
+        content = file.read()
         offset = content.find(string)
         return string in content, offset
 
