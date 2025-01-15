@@ -11,3 +11,7 @@ Tantalus Interactive (now known as Tantalus Media) made some Game Boy Advance ga
 - Top Gear Rally
 - Trick Star
 - Woody Woodpecker in Crazy Castle 5
+
+### File formats:
+Most games only use RBH. It's a RIFF-based container format with a "PIFF" header.
+![image](https://github.com/user-attachments/assets/f9c5aa2e-51f7-42c0-937b-dd3b1878d9ff)
