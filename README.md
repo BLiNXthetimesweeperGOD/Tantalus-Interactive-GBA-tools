@@ -15,3 +15,18 @@ Tantalus Interactive (now known as Tantalus Media) made some Game Boy Advance ga
 ### File formats:
 Most games only use RBH. It's a RIFF-based container format with a "PIFF" header.
 ![image](https://github.com/user-attachments/assets/f9c5aa2e-51f7-42c0-937b-dd3b1878d9ff)
+
+### RBH sections
+Each RBH file has many sections. The following is a list of all known ones and what they appear to do:
+- The header ("PIFF" format) (holds file information as a bunch of integers)
+- BODY (stores almost any type of data)
+- PACK/PKDB/PKDW/PKDL (stores almost any type of compressed data)
+- GLOB (stores what appears to be global variables)
+- RELC (unknown, is always near GLOB)
+
+Despite having a length value before each RBH file, it isn't actually relevant and is only used by the engine to tell where the file starts and stops in the ROM.
+
+Each file referenced by the file table should be looked at with the following structure:
+
+- Length
+- Data
