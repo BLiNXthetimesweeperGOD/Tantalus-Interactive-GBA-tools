@@ -10,7 +10,7 @@ Tantalus Interactive (now known as Tantalus Media) made some Game Boy Advance ga
 - The Polar Express
 - Top Gear Rally
 - Trick Star
-- Woody Woodpecker in Crazy Castle 5
+- Woody Woodpecker in Crazy Castle 5 (uses a different hashing algorithm, needs to be looked into)
 
 ### File formats:
 Most games only use RBH. It's a RIFF-based container format with a "PIFF" header.
