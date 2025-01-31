@@ -4,6 +4,33 @@ import tkinter as tk
 from tkinter import filedialog
 import struct
 
+def makeCharacterUppercase(character):
+    if character - 0x61 < 0x1A:
+        character = character - 0x20
+    return character
+
+def generateFilenameHash(string, entryZero):
+    hashRegister = 1
+    weightedSum = 1
+    index = 0
+    character = string[index]
+    while character != 0x00:
+        if character not in range(0, 0x60):
+            processedCharacter = makeCharacterUppercase(character)
+        else:
+            processedCharacter = character
+        if character == 0x2F:
+            processedCharacter = 0x5C
+
+        weightedSum = weightedSum + processedCharacter * (index + entryZero)
+        hashRegister = (hashRegister * 2) + weightedSum
+        hashRegister = hashRegister & 0xFFFFFFFF
+        character = string[index]
+        if index == 1:
+            hashRegister -= 4
+        index += 1
+    return hashRegister
+
 def uint(data):
     return struct.unpack("<I", data)[0]
 def uintPointer(data):
@@ -19,8 +46,38 @@ def checkForByteString(path, string):
         content = file.read()
         offset = content.find(string)
         return string in content, offset
+def getZeroTerminatedString(file, offset):
+    string = b""
+    scan = b''
+    with open(file, "rb") as fileWithString:
+        fileWithString.seek(offset)
+        while scan != b'\x00':
+            scan = fileWithString.read(1)
+            if scan != b'\x00':
+                string += scan
+    return string
+def findStrings(filePath, byteString):
+    results = []
+    with open(filePath, "rb") as file:
+        content = file.read()
+        start = 0
+        while True:
+            start = content.find(byteString, start)
+            if start == -1:
+                break
+            string = getZeroTerminatedString(filePath, start)
+            results.append(b'../targ/'+string + b'\x00')
+            start += len(byteString)
+    return results
 
 file = openFile()
+
+#Grab all filenames from the ROM for later use
+fileNameList = []
+fileNameList.extend(findStrings(file, b'art/'))
+fileNameList.extend(findStrings(file, b'Art/'))
+fileNameList.extend(findStrings(file, b'ART/'))
+
 outPath = os.getcwd()+"/"+os.path.splitext(os.path.basename(file))[0]
 if not os.path.exists(outPath):
     os.makedirs(outPath)
@@ -36,13 +93,24 @@ if found == True: #The ROM contained the byte string. Start extracting files.
         fileCount = uint(rom.read(4))
         fileTableVersion = uint(rom.read(4)) #Just a guess - this could be something else entirely, but I have no idea yet
         for asset in range(fileCount):
+            named = False
             fileNameHash = uint(rom.read(4)) #This is calculated and stored in register 7 until the correct file in the file table has been found.
+            for fileName in fileNameList:
+                Hash = generateFilenameHash(fileName, 0)
+                if Hash == fileNameHash:
+                    outName = fileName[3:-1].decode('UTF-8')
+                    subOutPath = os.path.dirname(outName)
+                    if not os.path.exists(outPath+"/"+subOutPath):
+                        os.makedirs(outPath+"/"+subOutPath)
+                    named = True
+                    break
             fileOffset = uintPointer(rom.read(4))
             savedPosition = rom.tell()
             rom.seek(fileOffset)
             fileSize = uint(rom.read(4))
-            with open(outPath+f"/{asset}.rbh", "w+b") as outputFile:
-                outputFile.write(rom.read(fileSize))
+            if named == True:
+                with open(outPath+f"/{outName}", "w+b") as outputFile:
+                    outputFile.write(rom.read(fileSize))
             rom.seek(savedPosition)
 else:
     print("The ROM you ran this on is not a valid Tantalus Interactive GBA game.\nThis could be because it's a bad dump, not a ROM or a game from a different developer.\nPress enter/return to close this window.")
