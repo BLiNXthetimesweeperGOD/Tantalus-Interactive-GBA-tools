@@ -24,7 +24,7 @@ Each RBH file has many sections. The following is a list of all known ones and w
 - GLOB (stores what appears to be global variables)
 - RELC (unknown, is always near GLOB)
 
-Despite having a length value before each RBH file, it isn't actually relevant and is only used by the engine to tell where the file starts and stops in the ROM.
+Despite having a length value before each RBH file, it isn't actually relevant and is only used by the engine to tell where the file ends in the ROM.
 
 Each file referenced by the file table should be looked at with the following structure:
 
