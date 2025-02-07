@@ -38,3 +38,4 @@ Each file referenced by the file table should be looked at with the following st
 - Fully document the sections of the RBH format
 - Finish documenting CRIS
 - Make a GUI for the decompression tool (but still respect the original developer by not outright stealing it/throwing it in here)
+- Move all documentation into a "documentation" folder, the main page should exclusively be for explaining what this is for
