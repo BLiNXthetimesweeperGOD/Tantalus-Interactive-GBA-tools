@@ -31,3 +31,17 @@ Section length
 16-Bit (unknown)
 (repeat until data end, this should at least give you the section count)
 ```
+
+### GLOB format
+GLOB stores variables (offsets, maybe?). The formatting is known, but what exactly it does still needs work.
+
+```
+47 4C 4F 42 ("GLOB")
+(32-Bit Data Length)
+(Data)
+
+Data format:
+(32-Bit count, 32-Bit unknown)
+(32-Bit value, 32-Bit value)
+(Repeat value part {count}-1 times)
+```
