@@ -18,7 +18,8 @@ Most games only use RBH. It's a RIFF-based container format with a "PIFF" header
 
 ### RBH sections
 Each RBH file has many sections. The following is a list of all known ones and what they appear to do:
-- The header ("PIFF" format) (holds file information as a bunch of integers)
+- The header ("PIFF" magic, "RBHF" format)
+- The RBHH section (header)
 - BODY (stores almost any type of data)
 - PACK/PKDB/PKDW/PKDL (stores almost any type of compressed data) (you can decompress it with [this](https://github.com/leeao/RORPSPTOOL))
 - GLOB (stores what appears to be global variables)
