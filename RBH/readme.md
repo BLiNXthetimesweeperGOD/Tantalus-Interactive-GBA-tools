@@ -9,7 +9,7 @@ RBH files are RIFF-based containers which can be broken up into chunks:
 - RELC/GLOB sections which contain various variables
 
 
-### Header
+### PIFF Chunk/Header Formats
 In the RBH format, the first chunk is formatted like this:
 
 ```
