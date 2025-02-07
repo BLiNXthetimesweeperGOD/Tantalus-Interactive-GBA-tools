@@ -12,6 +12,7 @@
 - UVs are corner-based
 
 Formatting examples:
+
 Quad:
 ```
 00 00                                                   (16-Bit, every entry starts with this)
