@@ -3,6 +3,7 @@
 ### Textures
 - Colors are stored as a BGR555 palette, stored in the SpriteTemplate.rbh file
 - Textures are always 8 bits per pixel and are generally stored with the model, separately from the palette
+- Textures aren't tiled
 
 ### Models
 - There isn't any defined normals (the geometry is already facing the right way as-is)
