@@ -5,7 +5,7 @@ Do not expect this to be 100% accurate yet.
 RBH files are RIFF-based containers which can be broken up into chunks:
 
 - The header (lists out data sizes for each chunk)
-- PACK/PK(DB/DW/DL)/BODY sections which contain data
+- PACK/PKD(B/W/L)/BODY sections which contain data
 - RELC/GLOB sections which contain various variables
 
 
