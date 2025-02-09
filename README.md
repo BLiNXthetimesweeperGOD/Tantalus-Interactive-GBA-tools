@@ -10,7 +10,7 @@ Tantalus Interactive (now known as Tantalus Media) made some Game Boy Advance ga
 - The Polar Express
 - Top Gear Rally
 - Trick Star
-- Woody Woodpecker in Crazy Castle 5 (uses a different algorithm, needs to be looked into)
+- Woody Woodpecker in Crazy Castle 5
 
 ### File formats:
 Most games only use RBH. It's a RIFF-based container format with a "PIFF" header.
@@ -33,7 +33,6 @@ Each file referenced by the file table should be looked at with the following st
 - Data
 
 # To-Do
-- Figure out how filenames are handled in earlier versions of the engine
 - Go through all games with "%s" strings and manually add all filenames that they'd reference to a big list
 - Fully document the sections of the RBH format
 - Finish documenting CRIS
