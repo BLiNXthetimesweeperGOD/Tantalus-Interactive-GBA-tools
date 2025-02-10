@@ -34,6 +34,7 @@ Each file referenced by the file table should be looked at with the following st
 
 # To-Do
 - Go through all games with "%s" strings and manually add all filenames that they'd reference to a big list
+- Go through all games with genuinely nameless files and figure out what the names were meant to be using their hashes
 - Fully document the sections of the RBH format
 - Document the various formats embedded within the RBH files
 - Finish documenting CRIS
